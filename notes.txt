@@ -30,11 +30,11 @@ town -- sunbaked road east before marshlands
 
 town -- sunbaked road west before sparrow/redwaste
 
-Sparrow's Dive -- This relatively newer road cropped up along the eastern edge of the red waste, made by travellers avoiding the barren region and trying to make a shorter route tothe lands south in the Tiran kingdom. The effort was successful, and now there are even a couple small towns along the way
+Sparrow's Dive -- This relatively newer road cropped up along the eastern edge of the red waste, made by travellers avoiding the barren region and trying to make a shorter route tothe lands south in the Tiran kingdom. The effort was successful, and now there are even a couple small towns along the way as this somewhat bumpy road goes from its initial dry baked origins stemming off of the Old King's Thoroughfare to a gradually more maleable consistency, easing ever so slightly back east as it goes south and after the first town of Oleanthrip  eventually nestles up alongside the narrow slip of a river that is the serpent's back. From there the road winds east and west, all the while continuing southward, untill it meets up with Gallow's Rest and the crossroads that pass through it.
 
-town -- along Sparrow's Dive road before river
+Oleanthrip -- along Sparrow's Dive road before river
 
-town -- along sparrow's dive where river starts up, edging away from wastes, river leads down to Tiran
+Gallows Rest (crossroad, medium/large town at northern part of Tiran, the central kingdom) -- along sparrow's dive where river starts up, edging away from wastes, river leads down to Tiran
 
 The Red Waste -- 
 
