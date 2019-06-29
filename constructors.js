@@ -26,7 +26,8 @@ const Armor = function(name, durability, slash, blunt, pierce, weight, slot, war
 
 // age... , height, weight, hairStyle, hairColor, eyeColor,
 const Character = function(name, race, age, strength, agility, dexterity, perception, intelligence, wisdom, constitution, endurance){
-    this.name = name.replace(/\s+/g, "").toLowerCase(),
+    this.name = function (){
+        this.fullName.replace(/\s+/g, "").toLowerCase()},
     this.fullName = name,
     this.race = race || "human",
     this.age = age || 18,
