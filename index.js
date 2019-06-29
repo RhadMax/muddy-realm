@@ -8,7 +8,8 @@ const construct = require("./constructors.js");
 // console.log(characters);
 var players = [];
 var currentPlayer;
-
+let newChar = new construct.Character("max", "human", 16, 7, 4, 3, 3, 1, 1, 7, 6);
+console.log(newChar)
 
 const findIndex = (name, array) => {
     for (let i = 0; i < array.length; i++) {
@@ -18,6 +19,7 @@ const findIndex = (name, array) => {
     }
 }
 
+//first step of char creation, user selects name/race/age and chooses from template builds to start or can opt to start custom creation (custom creation not yet functioning)
 const newCharacter = function () {
     inquirer.prompt([
         {
@@ -28,7 +30,7 @@ const newCharacter = function () {
         {
             type: "list",
             message: "Of what race are you?",
-            choices: ["Northerner", "Tiranian", "Wastelander", "Marshfolk", "Amurrkan"], //Maybe just regional origins, names tbd
+            choices: ["Kil'jari", "Tiranian", "Wastelander", "Marshfolk", "Amurrkan"], //Maybe just regional origins, names tbd
             name: "race"
         },
         {
@@ -48,13 +50,15 @@ const newCharacter = function () {
             case "Warrior":
                 newChar = new construct.Character(res.name, res.race, res.age, 6, 4, 4, 3, 2, 2, 6, 5);
                 players.push(newChar);
-                currentPlayer = NewChar;
-                return intro();
+                currentPlayer = newChar;
+                intro();
+                break;
             case "Berzerker":
-                let newChar = new construct.Character(res.name, res.race, res.age, 7, 4, 3, 3, 1, 1, 7, 6);;
+                let newChar = new construct.Character(res.name, res.race, res.age, 7, 4, 3, 3, 1, 1, 7, 6);
                 players.push(newChar);
                 // currentPlayer = NewChar;
-                return confirmNewCharacter();
+                confirmNewCharacter();
+                break;
             case "Rogue":
                 ;
             case "Ranger":
@@ -64,10 +68,13 @@ const newCharacter = function () {
             case "Invoker":
                 ;
             case "Custom":
-                return newCharacterCustom(res);
+                newCharacterCustom(res);
+                break;
         }
     });
 }
+
+//function for entering custom statistic values, current plan is it takes in the res from the first prompt where user selects name/race/age, then asks about stats one by one. Ideally it shows the total number of stat points left to allocate but unsure how inquirer can do that unless it chains a number of functions together, one for each stat, and maybe also even recursively calls itself untill the user selects a prompt to move on to next statistic. In that case it could maybe build an array up as it goes, passing it along from function to function as it chains along. Each function adjusting the stat value corresponding to an index in the statbuilder array, using inquirer prompts/responses. Each prompt could display the array (or object?) so the user has a look at their progress in building up their stats.  ---OR --- duh, make a function inside the inquirer prompt that displays current stats, remaining total, and user can select from list to increase/decrease each stat
 const newCharacterCustom = function (res) {
     inquirer.prompt([
         {
@@ -91,7 +98,7 @@ const newCharacterCustom = function (res) {
     });
 }
 
-
+//planned to be first thing upon loadup, simple prompt that calls other functions depending on choice
 const mainMenu = function () {
     inquirer.prompt([
         {
@@ -104,15 +111,19 @@ const mainMenu = function () {
         let choice = res.menu;
         switch (choice) {
             case "New Game":
-                return newCharacter();
+                newCharacter();
+                break;
             case "Load Character":
                 console.log("Loading not yet implemented");
-                return;
+                break;
             case "Exit Game":
-                connection.end();
+                // connection.end(); //if it goes online
+                break;
         }
     });
 };
+
+//idea to have a prompt with inquirer giving yes/no option to user after char creation is completed, so they can choose to start over if it doesn't look right. currently not being called nor is working properly
 const confirmNewCharacter = function (res) {
     inquirer.prompt([
         {
@@ -125,21 +136,46 @@ const confirmNewCharacter = function (res) {
         let confirmation = answer.selection;
         switch (confirmation) {
             case "Yes":
-                return intro();
+                intro();
+                break;
             case "No":
                 console.log("Very well, returning to main menu.");
-                return mainMenu();
+                mainMenu();
+                break;
         }
         return confirmNewGame;
     });
 
 };
-const combat = function () {
+
+
+const gameplay = function () {
     inquirer.prompt([
         {
-
+            type: "input",
+            message: "",
+            name: "cmd"
         }
     ]).then((res) => {
+
+        switch (res.cmd.toLowerCase()) {
+            case "north":
+            case "n":
+                moveNorth()
+                break;
+            case "east":
+            case "e":
+                moveEast()
+                break;
+            case "south":
+            case "s":
+                moveNorth()
+                break;
+            case "west":
+            case "w":
+                moveNorth()
+                break;
+        }
 
     });
 };
