@@ -25,7 +25,7 @@ const Armor = function(name, durability, slash, blunt, pierce, weight, slot, war
 
 
 // age... , height, weight, hairStyle, hairColor, eyeColor,
-const Character = function(name, race, age, strength, agility, dexterity, perception, intelligence, wisdom, constitution, endurance){
+const Character = function(name, race, age, strength, agility, dexterity, perception, intelligence, wisdom, constitution, endurance, health, stamina,spirit, statusArray, skillsArray, invArray, equipArray, x, y){
     this.name = function (){
         this.fullName.replace(/\s+/g, "").toLowerCase()},
     this.fullName = name,
@@ -45,17 +45,17 @@ const Character = function(name, race, age, strength, agility, dexterity, percep
     this.wisdom = wisdom || 4, //also affects aptitude, affects spirit more heavily than int, skill/gear reqs
     this.constitution = constitution || 4, //heavy impact on health, resistance to physical ails, small affect to stamina and carry
     this.endurance = endurance || 4, // heavily impacts stamina, small affect to physical resistances and carry
-    this.health = 5, //vitality in pure, at low %'s causes status effects like weakness or faintness, loss of incurs unconc
+    this.health = health, //vitality in pure, at low %'s causes status effects like weakness or faintness, loss of incurs unconc
     this.maxHealth = function() {
         maxHealth = (this.constitution * 4) + (this.endurance * 2) + this.strength;
         return maxHealth;
     },
-    this.stamina = this.maxHealth(), //cost of performing special attacks or abilities, some spells take a lot of energy as well
+    this.stamina = stamina, //cost of performing special attacks or abilities, some spells take a lot of energy as well
     this.maxStamina = function() {
         maxStamina = (this.constitution * 2) + (this.endurance * 4) + this.strength + (this.agility * 2)+ (this.dexterity * 2);
         return maxStamina;
     },
-    this.spirit = 5, //mental energy, factors into resistances of supernatural and resisting other status effects
+    this.spirit = spirit, //mental energy, factors into resistances of supernatural and resisting other status effects
     this.maxSpirit = function() {
         maxSpirit = (this.wisdom * 4) + (this.intelligence * 3) + this.endurance;
         return maxSpirit;
