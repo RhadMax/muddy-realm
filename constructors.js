@@ -24,8 +24,8 @@ const Armor = function(name, durability, slash, blunt, pierce, weight, slot, war
 }
 
 
-
-const Character = function(name, race, age, height, weight, hairStyle, hairColor, eyeColor, strength, agility, dexterity, perception, intelligence, wisdom, constitution, endurance){
+// age... , height, weight, hairStyle, hairColor, eyeColor,
+const Character = function(name, race, age, strength, agility, dexterity, perception, intelligence, wisdom, constitution, endurance){
     this.name = name.replace(/\s+/g, "").toLowerCase(),
     this.fullName = name,
     this.race = race || "human",
@@ -66,7 +66,7 @@ const Character = function(name, race, age, height, weight, hairStyle, hairColor
         for (let i = 0; i < this.equipment.length; i++){
             gearWeight += this.equipment[i].weight;
         }
-        speed = ((this.agility+this.dexterity)*2) + (this.strength + this.endurance - (parseFloat(gearWeight)*2)) + ((this.stamina * 4) - this.maxStamina());
+        speed = (this.agility * 3) + (this.dexterity * 2) + (this.strength + this.endurance - (parseFloat(gearWeight)*2)) + ((this.stamina * 4) - this.maxStamina());
         if (speed < 5) { speed = 5 }
         return speed;
     },
@@ -75,7 +75,9 @@ const Character = function(name, race, age, height, weight, hairStyle, hairColor
     this.equipment = [{name:"empty", weight: 0}], // array of equipment currently worn, will be of a set length of indexes and what slot it occupies will be handled by index. Upon changing gear that index will be sliced out into temporary variable and then either placed in inventory/at ground or if 'empty (undefined??)' then no action --- this depends on specific index, tougher to implement but may work with default empty gear for each slot that fills indexes, less scalable
 
     //other idea would be to make equipment an array of indeterminate length that can be empty if need be, and every item has a slot parameter, upon changing gear it compares slot of item being equipped to every item in equipped array, if another item in array has same slot value then the equipped item is taken out of array before new item is added in. tricky bit is 1h vs 2h weapons, or shields vs 2h weapons... will address later
-    this.inventory = [] //at base level, self explanatory, but perhaps can use some sort of system of combined volume+weight, if no pack is used then is limited to open hands... maybe can carry multiple items in a hand/under arm but at cost of status effect ie encumbered, but more detailed?   
+    this.inventory = [] //at base level, self explanatory, but perhaps can use some sort of system of combined volume+weight, if no pack is used then is limited to open hands... maybe can carry multiple items in a hand/under arm but at cost of status effect ie encumbered, but more detailed?  
+    this.x = 1,
+    this.y = 1
 };
 
 const Zone = function(name, temp, elevation, humidity, light){
