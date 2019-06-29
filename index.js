@@ -149,7 +149,7 @@ const confirmNewCharacter = function (res) {
 };
 
 
-const gameplay = function () {
+const gamePlay = function () {
     inquirer.prompt([
         {
             type: "input",
@@ -175,6 +175,20 @@ const gameplay = function () {
             case "w":
                 moveNorth()
                 break;
+            case "save":
+                savePlayer()
+                gamePlay()
+                break;
+            case "quit":
+                savePlayer()
+                // connection.end()
+                break;
+            case "attack":
+            case "a":
+            case "kill":
+            case "k":
+                console.log("attack not yet implemented, all mobs are hostile as of this build")
+                gamePlay();
         }
 
     });
