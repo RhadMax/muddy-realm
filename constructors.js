@@ -31,12 +31,12 @@ const Character = function(name, race, age, strength, agility, dexterity, percep
     this.fullName = name,
     this.race = race || "human",
     this.age = age || 18,
-    this.height = height || 17, //18 hands = 6ft, so 17 hands is 5'8... 4 inches to a hand
-    this.weight = weight || 12, //14 pounds to a stone, so 12 stones is 168 lbs. 15 stones is 200lbs. 
-    this.hairStyle = hairStyle || "short", // styles can be varied, perhaps just limit to it fitting a certain type of phrasing like "...worn 'short' or 'long with ponytail' 'long with curls about the shoulders'"
-    this.hairColor = hairColor || "brown",
-    this.eyeColor = eyeColor || "brown",
-    this.build = "average",  //aesthetic, may change with fluctuations in statistic ratios (ie, if str+endurance+const > (agi+dex)*2 then becomes heavily built)... just flavor text atm but may result in certain sitautions arising or even resistances/vulnerabilities to status effects
+    // this.height = height || 17, //18 hands = 6ft, so 17 hands is 5'8... 4 inches to a hand
+    // this.weight = weight || 12, //14 pounds to a stone, so 12 stones is 168 lbs. 15 stones is 200lbs. 
+    // this.hairStyle = hairStyle || "short", // styles can be varied, perhaps just limit to it fitting a certain type of phrasing like "...worn 'short' or 'long with ponytail' 'long with curls about the shoulders'"
+    // this.hairColor = hairColor || "brown",
+    // this.eyeColor = eyeColor || "brown",
+    // this.build = "average",  //aesthetic, may change with fluctuations in statistic ratios (ie, if str+endurance+const > (agi+dex)*2 then becomes heavily built)... just flavor text atm but may result in certain sitautions arising or even resistances/vulnerabilities to status effects
     this.strength = strength || 4,  //for all stats, work with base 10 and low scaling, to increase sense of progression, minimum of 1... str affects damage with weapons of most types (code alternative in case by case?), carry capacity and gear restrictions
     this.agility = agility || 4, //general speed of movement, fluidity (ie some skill impact maybe?)
     this.dexterity = dexterity || 4, //speed with more emphasis on hands/feet than overall body positioning. Akin to hand/eye
@@ -50,7 +50,7 @@ const Character = function(name, race, age, strength, agility, dexterity, percep
         maxHealth = (this.constitution * 4) + (this.endurance * 2) + this.strength;
         return maxHealth;
     },
-    this.stamina = 5, //cost of performing special attacks or abilities, some spells take a lot of energy as well
+    this.stamina = this.maxHealth(), //cost of performing special attacks or abilities, some spells take a lot of energy as well
     this.maxStamina = function() {
         maxStamina = (this.constitution * 2) + (this.endurance * 4) + this.strength + (this.agility * 2)+ (this.dexterity * 2);
         return maxStamina;
